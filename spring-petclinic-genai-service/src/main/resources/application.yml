@@ -37,6 +37,15 @@ logging:
           chat:
             client:
               advisor: DEBUG
+
+security:
+  jwt-secret: ${JWT_SECRET:petclinic-secret-key-minimum-32-chars}
+  authorization-rules:
+    - paths: ["/chatclient"]
+      method: POST
+      authorities: ["ROLE_USER", "ROLE_ADMIN"]
+    - paths: ["/actuator/**"]
+      authorities: ["permitAll"]
 ---
 spring:
   config:

@@ -8,6 +8,15 @@ spring:
   profiles:
     active: production
 
+security:
+  jwt-secret: ${JWT_SECRET:petclinic-secret-key-minimum-32-chars}
+  authorization-rules:
+    - paths: ["/vets"]
+      method: GET
+      authorities: ["permitAll"]
+    - paths: ["/actuator/**"]
+      authorities: ["permitAll"]
+
 ---
 spring:
   config:

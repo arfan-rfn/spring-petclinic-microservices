@@ -18,3 +18,9 @@ vets:
   cache:
     ttl: 10
     heap-size: 10
+
+security:
+  jwt-secret: test-secret-key-for-tests-32-chars
+  authorization-rules:
+    - paths: ["/**"]
+      authorities: ["permitAll"]

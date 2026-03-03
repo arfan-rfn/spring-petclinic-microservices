@@ -4,6 +4,18 @@ spring:
   config:
     import: optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888/}
 
+security:
+  jwt-secret: ${JWT_SECRET:petclinic-secret-key-minimum-32-chars}
+  authorization-rules:
+    - paths: ["/owners/*/pets/*/visits", "/pets/visits"]
+      method: GET
+      authorities: ["permitAll"]
+    - paths: ["/owners/*/pets/*/visits"]
+      method: POST
+      authorities: ["ROLE_USER", "ROLE_ADMIN"]
+    - paths: ["/actuator/**"]
+      authorities: ["permitAll"]
+
 
 ---
 spring:
